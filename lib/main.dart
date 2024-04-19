@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quiz_app/config/theme/app_theme.dart';
+import 'package:quiz_app/features/quiz/presentation/pages/homepage.dart';
+import 'package:quiz_app/features/quiz/presentation/provider/status.dart';
 
 void main() {
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => null),
-    ],
-    child: const MyApp()));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => Status()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,6 +15,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+      theme: AppTheme.darkTheme,
+      home: const HomePage(),
+    );
   }
 }

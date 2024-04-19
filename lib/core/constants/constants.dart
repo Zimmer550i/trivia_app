@@ -1,4 +1,7 @@
-const String BASE_API_URL = 'https://opentdb.com/api.php?amount=10';
+import 'package:flutter/material.dart';
+
+const int TOTAL_QUESTION_COUNT = 10;
+const String BASE_API_URL = 'opentdb.com';
 const List<Map<String, String>> CATEGORIES = [
   {'id': '9', 'name': 'General Knowledge'},
   {'id': '10', 'name': 'Entertainment: Books'},
@@ -25,3 +28,8 @@ const List<Map<String, String>> CATEGORIES = [
   {'id': '31', 'name': 'Entertainment: Japanese Anime & Manga'},
   {'id': '32', 'name': 'Entertainment: Cartoon & Animations'},
 ];
+
+const Color BACKGROUND_COLOR = Color.fromARGB(255, 30, 45, 65);
+const Color PRIMARY_COLOR = Color.fromARGB(255, 230, 130, 50);
+const Color SECONDARY_COLOR = Color.fromARGB(255, 45, 65, 90);
+const Color WHITE_COLOR = Color.fromARGB(255, 200, 220, 230);
