@@ -6,24 +6,24 @@ class Status extends ChangeNotifier{
   int totalQCount = 10;
   int currentQ = 0;
   int score = 0;
+  int difficulty = 0;
+  String category = "0";
   List<Question> questions = [];
 
   int get getScore => score;
 
-  void startGame(){
-    isPlaying = true;
-    currentQ = 0;
-    score = 0;
-    notifyListeners();
-  }
-
-  void endGame(){
-    isPlaying = false;
+  void changeDifficulty(int n){
+    difficulty = n;
     notifyListeners();
   }
 
   void getQuestions(List<Question> q){
     questions = q;
+    notifyListeners();
+  }
+
+  void changeCategory(String id){
+    category = id;
     notifyListeners();
   }
 }
