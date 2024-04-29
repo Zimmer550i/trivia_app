@@ -6,6 +6,7 @@ import 'package:quiz_app/config/theme/app_theme.dart';
 import 'package:quiz_app/core/constants/constants.dart';
 import 'package:quiz_app/features/quiz/presentation/provider/status.dart';
 import 'package:quiz_app/features/quiz/presentation/widgets/difficulty_button.dart';
+import 'package:quiz_app/features/quiz/presentation/widgets/page_change_button.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,18 +15,19 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Quiz App"),
+        title: Text("Quiz App", style: AppTheme.appName,),
         centerTitle: true,
-        leading: const Icon(Icons.menu_rounded),
+        leading: Icon(Icons.menu_rounded, size: DEFAULT_PADDING*2,),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
           bottomLeft: Radius.elliptical(3 * DEFAULT_PADDING, DEFAULT_PADDING),
           bottomRight: Radius.elliptical(3 * DEFAULT_PADDING, DEFAULT_PADDING),
         )),
-        toolbarHeight: 100,
+        toolbarHeight: 120,
+        elevation: 5,
         actions: [
-          const Center(
-            child: Icon(Icons.account_circle_rounded),
+          Center(
+            child: Icon(Icons.account_circle_rounded, size: DEFAULT_PADDING*2,),
           ),
           SizedBox(
             width: DEFAULT_PADDING,
@@ -45,13 +47,12 @@ class HomePage extends StatelessWidget {
               height: DEFAULT_PADDING,
             ),
             Expanded(
-              child: ListWheelScrollView(
-                itemExtent: BASE_WIDGET_HEIGHT + DEFAULT_PADDING/3,
-                diameterRatio: 5,
+              child: ListView(
                 children:
                     CATEGORIES.map((map) => topicNames(context, map)).toList(),
               ),
-            )
+            ),
+            const Button(text: "Begin",),
           ],
         ),
       ),
@@ -61,7 +62,7 @@ class HomePage extends StatelessWidget {
   Widget topicNames(BuildContext context, Map<String, String> item) {
     bool isSelected = context.watch<Status>().category == item['id'];
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: DEFAULT_PADDING/6),
+      padding: EdgeInsets.symmetric(vertical: DEFAULT_PADDING/3),
       child: InkWell(
         onTap: () {
           context.read<Status>().changeCategory(item['id']!);
@@ -71,10 +72,10 @@ class HomePage extends StatelessWidget {
           height: BASE_WIDGET_HEIGHT,
           decoration: BoxDecoration(
             color: isSelected ? PRIMARY_COLOR : SECONDARY_COLOR,
-            borderRadius: BorderRadius.circular(DEFAULT_PADDING),
+            borderRadius: BorderRadius.circular(DEFAULT_PADDING/2),
             boxShadow: [AppTheme.boxShadow],
           ),
-          child: Center(child: Text(item['name']!)),
+          child: Center(child: Text(item['name']!, style: AppTheme.largeText,)),
         ),
       ),
     );

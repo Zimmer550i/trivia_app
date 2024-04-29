@@ -38,14 +38,14 @@ class DifficultyButton extends StatelessWidget {
           duration: const Duration(milliseconds: 300),
           height: BASE_WIDGET_HEIGHT,
           decoration: BoxDecoration(
-            color: isSelected ? PRIMARY_COLOR : WHITE_COLOR,
+            color: isSelected ? PRIMARY_COLOR : WHITE_COLOR.withAlpha(0),
             borderRadius: BorderRadius.circular(DEFAULT_PADDING / 3),
             boxShadow: isSelected ? [AppTheme.boxShadow] : [],
           ),
           child: Center(
               child: Text(
             text,
-            style: AppTheme.blackText.copyWith(fontWeight: FontWeight.bold),
+            style: AppTheme.defaultText.copyWith(fontWeight: FontWeight.bold, color: isSelected ? WHITE_COLOR : Colors.black87),
           )),
         ),
       ),

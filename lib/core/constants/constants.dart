@@ -30,7 +30,7 @@ const List<Map<String, String>> CATEGORIES = [
   {'id': '28', 'name': 'Vehicles'},
   {'id': '29', 'name': 'Comics'},
   {'id': '30', 'name': 'Gadgets'},
-  {'id': '31', 'name': 'Japanese Anime & Manga'},
+  {'id': '31', 'name': 'Anime & Manga'},
   {'id': '32', 'name': 'Cartoon & Animations'},
 ];
 
