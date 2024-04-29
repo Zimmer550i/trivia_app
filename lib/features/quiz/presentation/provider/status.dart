@@ -7,7 +7,9 @@ class Status extends ChangeNotifier {
   bool isPlaying = false;
   int totalQCount = 10;
   int currentQ = 0;
+  int? currentChoice;
   int score = 0;
+  bool isChecking = false;
   int difficulty = 0;
   String? category;
   bool isLoading = false;
@@ -15,8 +17,22 @@ class Status extends ChangeNotifier {
 
   int get getScore => score;
 
+  void reset() {
+    currentQ = 0;
+    score = 0;
+    isChecking = false;
+    isLoading = false;
+    difficulty = 0;
+    isPlaying = false;
+  }
+
   void changeDifficulty(int n) {
     difficulty = n;
+    notifyListeners();
+  }
+
+  void changeChoice(int? n) {
+    currentChoice = n;
     notifyListeners();
   }
 

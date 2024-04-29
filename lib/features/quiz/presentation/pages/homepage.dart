@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
               builder: (context) => const QuizPage(),
             ),
           ),
-        );
+        ).then((value) => context.read<Status>().isPlaying = true);
   }
 
   @override
