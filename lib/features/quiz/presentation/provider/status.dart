@@ -24,6 +24,9 @@ class Status extends ChangeNotifier {
     isLoading = false;
     difficulty = 0;
     isPlaying = false;
+    currentChoice = null;
+    category = null;
+    notifyListeners();
   }
 
   void changeDifficulty(int n) {

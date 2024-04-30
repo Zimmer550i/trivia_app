@@ -1,5 +1,6 @@
 final Map<String, String> htmlEntitiesMap = {
   '&quot;': '"',
+  '&#039;': '\'',
   '&amp;': '&',
   '&lt;': '<',
   '&gt;': '>',
