@@ -1,9 +1,4 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz_app/config/theme/app_theme.dart';
 import 'package:quiz_app/core/constants/constants.dart';
