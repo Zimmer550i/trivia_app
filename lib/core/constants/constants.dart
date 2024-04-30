@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 double BASE_WIDGET_HEIGHT = 50;
 double DEFAULT_PADDING = 16;
+int DEFAULT_ANIMTATION_DURATION = 100;
 
 const int TOTAL_QUESTION_COUNT = 10;
 const String BASE_API_URL = 'opentdb.com';

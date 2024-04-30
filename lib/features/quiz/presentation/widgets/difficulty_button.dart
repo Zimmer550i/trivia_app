@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz_app/config/theme/app_theme.dart';
 import 'package:quiz_app/core/constants/constants.dart';
@@ -9,6 +11,8 @@ class DifficultyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int diff = context.watch<Status>().difficulty;
+    double w = MediaQuery.of(context).size.width - (DEFAULT_PADDING * 3);
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(DEFAULT_PADDING / 2),
@@ -17,11 +21,30 @@ class DifficultyButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(DEFAULT_PADDING / 2.5),
         boxShadow: [AppTheme.boxShadow],
       ),
-      child: Row(
+      child: Stack(
         children: [
-          segment("Easy", 0, context),
-          segment("Medium", 1, context),
-          segment("Hard", 2, context),
+          AnimatedPositioned(
+            duration: Duration(
+              milliseconds: DEFAULT_ANIMTATION_DURATION,
+            ),
+            left: diff * w / 3,
+            child: Container(
+              width: w / 3,
+              height: BASE_WIDGET_HEIGHT,
+              decoration: BoxDecoration(
+                color: PRIMARY_COLOR,
+                borderRadius: BorderRadius.circular(DEFAULT_PADDING / 3),
+                boxShadow: [AppTheme.boxShadow],
+              ),
+            ),
+          ),
+          Row(
+            children: [
+              segment("Easy", 0, context),
+              segment("Medium", 1, context),
+              segment("Hard", 2, context),
+            ],
+          ),
         ],
       ),
     );
@@ -34,19 +57,16 @@ class DifficultyButton extends StatelessWidget {
         onTap: () {
           context.read<Status>().changeDifficulty(index);
         },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
+        child: SizedBox(
           height: BASE_WIDGET_HEIGHT,
-          decoration: BoxDecoration(
-            color: isSelected ? PRIMARY_COLOR : WHITE_COLOR.withAlpha(0),
-            borderRadius: BorderRadius.circular(DEFAULT_PADDING / 3),
-            boxShadow: isSelected ? [AppTheme.boxShadow] : [],
-          ),
           child: Center(
-              child: Text(
-            text,
-            style: AppTheme.defaultText.copyWith(fontWeight: FontWeight.bold, color: isSelected ? WHITE_COLOR : Colors.black87),
-          )),
+            child: Text(
+              text,
+              style: AppTheme.defaultText.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: isSelected ? WHITE_COLOR : Colors.black87),
+            ),
+          ),
         ),
       ),
     );
