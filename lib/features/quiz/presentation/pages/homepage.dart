@@ -18,13 +18,16 @@ class HomePage extends StatelessWidget {
         : status.difficulty == 1
             ? "medium"
             : "hard";
-    status.getQuestions(category, difficulty).then(
+    status
+        .getQuestions(category, difficulty)
+        .then(
           (value) => Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => const QuizPage(),
             ),
           ),
-        ).then((value) => context.read<Status>().isPlaying = true);
+        )
+        .then((value) => context.read<Status>().isPlaying = true);
   }
 
   @override
@@ -96,7 +99,7 @@ class HomePage extends StatelessWidget {
           context.read<Status>().changeCategory(item['id']!);
         },
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
+          duration: Duration(milliseconds: DEFAULT_ANIMATION_DURATION),
           height: BASE_WIDGET_HEIGHT,
           decoration: BoxDecoration(
             color: isSelected ? PRIMARY_COLOR : SECONDARY_COLOR,

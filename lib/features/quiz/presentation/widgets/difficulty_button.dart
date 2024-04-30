@@ -23,7 +23,7 @@ class DifficultyButton extends StatelessWidget {
         children: [
           AnimatedPositioned(
             duration: Duration(
-              milliseconds: DEFAULT_ANIMTATION_DURATION,
+              milliseconds: DEFAULT_ANIMATION_DURATION,
             ),
             left: diff * w / 3,
             child: Container(

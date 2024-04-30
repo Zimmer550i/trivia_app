@@ -141,13 +141,13 @@ class Choices extends StatelessWidget {
         onTap: () {
           if (isSelected) {
             context.read<Status>().changeChoice(null);
-          }else {
+          } else {
             context.read<Status>().changeChoice(position);
           }
           // Provider.of<Status>(context, listen: false).changeChoice(position);
         },
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
+          duration: Duration(milliseconds: DEFAULT_ANIMATION_DURATION),
           width: double.infinity,
           height: BASE_WIDGET_HEIGHT,
           decoration: BoxDecoration(
@@ -168,14 +168,16 @@ class Choices extends StatelessWidget {
                 ),
               ),
               AnimatedPositioned(
-                duration: const Duration(milliseconds: 300),
+                duration:
+                   Duration(milliseconds: DEFAULT_ANIMATION_DURATION),
                 left: isSelected
                     ? MediaQuery.of(context).size.width -
                         (DEFAULT_PADDING * 2.3) -
                         (BASE_WIDGET_HEIGHT - (DEFAULT_PADDING * 0.6))
                     : DEFAULT_PADDING * 0.3,
                 child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
+                  duration:
+                     Duration(milliseconds: DEFAULT_ANIMATION_DURATION),
                   height: BASE_WIDGET_HEIGHT - (DEFAULT_PADDING * 0.6),
                   width: BASE_WIDGET_HEIGHT - (DEFAULT_PADDING * 0.6),
                   decoration: BoxDecoration(
