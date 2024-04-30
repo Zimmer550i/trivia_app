@@ -147,7 +147,7 @@ class Choices extends StatelessWidget {
           // Provider.of<Status>(context, listen: false).changeChoice(position);
         },
         child: AnimatedContainer(
-          duration: Duration(milliseconds: DEFAULT_ANIMATION_DURATION),
+          duration: Duration(milliseconds: DEFAULT_ANIMATION_DURATION*3),
           width: double.infinity,
           height: BASE_WIDGET_HEIGHT,
           decoration: BoxDecoration(
@@ -168,16 +168,15 @@ class Choices extends StatelessWidget {
                 ),
               ),
               AnimatedPositioned(
-                duration:
-                   Duration(milliseconds: DEFAULT_ANIMATION_DURATION),
+                duration: Duration(milliseconds: DEFAULT_ANIMATION_DURATION*5),
+                curve: Curves.bounceOut,
                 left: isSelected
                     ? MediaQuery.of(context).size.width -
                         (DEFAULT_PADDING * 2.3) -
                         (BASE_WIDGET_HEIGHT - (DEFAULT_PADDING * 0.6))
                     : DEFAULT_PADDING * 0.3,
                 child: AnimatedContainer(
-                  duration:
-                     Duration(milliseconds: DEFAULT_ANIMATION_DURATION),
+                  duration: Duration(milliseconds: DEFAULT_ANIMATION_DURATION),
                   height: BASE_WIDGET_HEIGHT - (DEFAULT_PADDING * 0.6),
                   width: BASE_WIDGET_HEIGHT - (DEFAULT_PADDING * 0.6),
                   decoration: BoxDecoration(

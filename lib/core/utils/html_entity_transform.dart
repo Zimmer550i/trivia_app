@@ -24,6 +24,7 @@ final Map<String, String> htmlEntitiesMap = {
   '&lsquo;': '‘',
   '&ldquo;': '“',
   '&rdquo;': '”',
+  '&eacute;': 'é',
 };
 
 String htmlEntityTransform(String input) {
