@@ -25,6 +25,7 @@ class DifficultyButton extends StatelessWidget {
             duration: Duration(
               milliseconds: DEFAULT_ANIMATION_DURATION,
             ),
+            curve: Curves.easeInQuad,
             left: diff * w / 3,
             child: Container(
               width: w / 3,
@@ -51,12 +52,13 @@ class DifficultyButton extends StatelessWidget {
   Expanded segment(String text, int index, BuildContext context) {
     bool isSelected = context.watch<Status>().difficulty == index;
     return Expanded(
-      child: InkWell(
+      child: GestureDetector(
         onTap: () {
           context.read<Status>().changeDifficulty(index);
         },
-        child: SizedBox(
+        child: Container(
           height: BASE_WIDGET_HEIGHT,
+          color: Colors.amber.withOpacity(0),
           child: Center(
             child: Text(
               text,
