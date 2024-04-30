@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/core/utils/check_internet_connection.dart';
 import 'package:quiz_app/features/quiz/domain/entity/question.dart';
 import 'package:quiz_app/features/quiz/domain/usecases/get_questions.dart';
+import 'package:quiz_app/features/quiz/presentation/pages/quiz_page.dart';
 
 class Status extends ChangeNotifier {
   bool isPlaying = false;
@@ -16,6 +17,29 @@ class Status extends ChangeNotifier {
   List<Question> questions = [];
 
   int get getScore => score;
+
+  void nextQuestion(BuildContext context) {
+    currentQ += 1;
+    currentChoice = null;
+
+    if (currentQ < totalQCount) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (_) => const QuizPage(),
+        ),
+      );
+    } else {}
+  }
+
+  void addScore(int n) {
+    score += n;
+    notifyListeners();
+  }
+
+  void changeCheckingStatus(bool s) {
+    isChecking = s;
+    notifyListeners();
+  }
 
   void reset() {
     currentQ = 0;

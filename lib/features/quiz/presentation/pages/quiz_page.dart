@@ -16,10 +16,10 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   late String title;
-
   late Question question;
-
   late List<String> choiceList;
+
+  bool? isCorrect;
 
   bool isInitiated = false;
 
@@ -34,23 +34,34 @@ class _QuizPageState extends State<QuizPage> {
     return "Random";
   }
 
-  void initAtributes(BuildContext context) {
+  void init(BuildContext context) {
     title = findCategoryById(Provider.of<Status>(context).category);
     question = Provider.of<Status>(context)
         .questions[Provider.of<Status>(context).currentQ];
     choiceList = question.incorrectAnswers
       ..add(question.correctAnswer)
       ..shuffle();
+    context.read<Status>().isChecking = false;
 
+    isCorrect = null;
     isInitiated = true;
+  }
+
+  void check(BuildContext context) {
+    context.read<Status>().changeCheckingStatus(true);
+    if (context.read<Status>().currentChoice != null && choiceList[context.read<Status>().currentChoice!] == question.correctAnswer) {
+      isCorrect = true;
+      context.read<Status>().addScore(10);
+    } else {
+      isCorrect = false;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     if (!isInitiated) {
-      initAtributes(context);
+      init(context);
     }
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -109,9 +120,12 @@ class _QuizPageState extends State<QuizPage> {
 
             //Button
             Expanded(child: Container()),
-            const Button(
-              text: "Submit",
-              isColored: true,
+            Button(
+              text: context.watch<Status>().isChecking ? "Next" : "Check",
+              isColored: context.watch<Status>().isChecking ? true : false,
+              callBack: (context) => context.read<Status>().isChecking
+                  ? context.read<Status>().nextQuestion(context)
+                  : check(context),
             ),
           ],
         ),
@@ -131,27 +145,49 @@ class Choices extends StatelessWidget {
     return Provider.of<Status>(context).currentChoice == position;
   }
 
+  Color getColor(BuildContext context) {
+    bool isChecking = context.watch<Status>().isChecking;
+    bool isCorrect = context
+            .watch<Status>()
+            .questions[context.watch<Status>().currentQ]
+            .correctAnswer ==
+        text;
+
+    if (isChecking) {
+      if (isCorrect) {
+        return GREEN_COLOR;
+      } else if (position == context.watch<Status>().currentChoice) {
+        return RED_COLOR;
+      }
+    } else if (ifSelected(context)) {
+      return PRIMARY_COLOR;
+    }
+
+    return WHITE_COLOR;
+  }
+
   @override
   Widget build(BuildContext context) {
     bool isSelected = ifSelected(context);
+    Color color = getColor(context);
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: DEFAULT_PADDING * 0.3),
       child: GestureDetector(
         onTap: () {
+          if (context.read<Status>().isChecking) return;
           if (isSelected) {
             context.read<Status>().changeChoice(null);
           } else {
             context.read<Status>().changeChoice(position);
           }
-          // Provider.of<Status>(context, listen: false).changeChoice(position);
         },
         child: AnimatedContainer(
-          duration: Duration(milliseconds: DEFAULT_ANIMATION_DURATION*3),
+          duration: Duration(milliseconds: DEFAULT_ANIMATION_DURATION * 3),
           width: double.infinity,
           height: BASE_WIDGET_HEIGHT,
           decoration: BoxDecoration(
-            color: isSelected ? PRIMARY_COLOR : WHITE_COLOR,
+            color: color,
             borderRadius: BorderRadius.circular(BASE_WIDGET_HEIGHT),
           ),
           child: Stack(
@@ -168,7 +204,8 @@ class Choices extends StatelessWidget {
                 ),
               ),
               AnimatedPositioned(
-                duration: Duration(milliseconds: DEFAULT_ANIMATION_DURATION*5),
+                duration:
+                    Duration(milliseconds: DEFAULT_ANIMATION_DURATION * 5),
                 curve: Curves.bounceOut,
                 left: isSelected
                     ? MediaQuery.of(context).size.width -

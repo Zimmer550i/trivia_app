@@ -39,3 +39,5 @@ const Color BACKGROUND_COLOR = Color.fromARGB(255, 30, 45, 65);
 const Color PRIMARY_COLOR = Color.fromARGB(255, 230, 130, 50);
 const Color SECONDARY_COLOR = Color.fromARGB(255, 45, 65, 90);
 const Color WHITE_COLOR = Color.fromARGB(255, 200, 220, 230);
+const Color GREEN_COLOR = Color.fromARGB(255, 100, 230, 50);
+const Color RED_COLOR = Color.fromARGB(255, 230, 100, 50);
