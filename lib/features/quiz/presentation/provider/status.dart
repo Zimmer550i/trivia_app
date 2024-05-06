@@ -3,6 +3,7 @@ import 'package:quiz_app/core/utils/check_internet_connection.dart';
 import 'package:quiz_app/features/quiz/domain/entity/question.dart';
 import 'package:quiz_app/features/quiz/domain/usecases/get_questions.dart';
 import 'package:quiz_app/features/quiz/presentation/pages/quiz_page.dart';
+import 'package:quiz_app/features/quiz/presentation/pages/result_page.dart';
 
 class Status extends ChangeNotifier {
   bool isPlaying = false;
@@ -28,7 +29,13 @@ class Status extends ChangeNotifier {
           builder: (_) => const QuizPage(),
         ),
       );
-    } else {}
+    } else {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (_) => const Result(),
+        ),
+      );
+    }
   }
 
   void addScore(int n) {

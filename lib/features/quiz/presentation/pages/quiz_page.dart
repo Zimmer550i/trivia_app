@@ -49,7 +49,9 @@ class _QuizPageState extends State<QuizPage> {
 
   void check(BuildContext context) {
     context.read<Status>().changeCheckingStatus(true);
-    if (context.read<Status>().currentChoice != null && choiceList[context.read<Status>().currentChoice!] == question.correctAnswer) {
+    if (context.read<Status>().currentChoice != null &&
+        choiceList[context.read<Status>().currentChoice!] ==
+            question.correctAnswer) {
       isCorrect = true;
       context.read<Status>().addScore(10);
     } else {
