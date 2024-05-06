@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz_app/config/theme/app_theme.dart';
 import 'package:quiz_app/core/constants/constants.dart';
-import 'package:quiz_app/features/quiz/presentation/pages/homepage.dart';
+import 'package:quiz_app/features/quiz/presentation/pages/splash.dart';
 import 'package:quiz_app/features/quiz/presentation/provider/status.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     BASE_WIDGET_HEIGHT = MediaQuery.of(context).size.height/12;
     return MaterialApp(
       theme: AppTheme.darkTheme,
-      home: const HomePage(),
+      home: const Splash(),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz_app/config/theme/app_theme.dart';
 import 'package:quiz_app/core/constants/constants.dart';
@@ -39,9 +40,9 @@ class HomePage extends StatelessWidget {
           style: AppTheme.appName,
         ),
         centerTitle: true,
-        leading: Icon(
-          Icons.menu_rounded,
-          size: DEFAULT_PADDING * 2,
+        leading: Hero(
+          tag: "logo",
+          child: Lottie.asset("assets/splash.json"),
         ),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
