@@ -8,7 +8,9 @@ class GetQuestions {
     var result = await ApiCalls.fetchQuestions(
         category: category, difficulty: difficulty);
     if (result == null) {
-      throw Exception("Could not fetch data from cloud");
+      throw Exception("Could not fetch data from cloud.");
+    } else if (result.isEmpty) {
+      throw Exception("Error retrieving questions.");
     } else {
       for (var i in result) {
         rtn.add(QuestionModel.fromJson(i));

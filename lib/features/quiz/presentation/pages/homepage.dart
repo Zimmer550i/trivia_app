@@ -3,6 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz_app/config/theme/app_theme.dart';
 import 'package:quiz_app/core/constants/constants.dart';
+import 'package:quiz_app/core/utils/show_snackbar.dart';
 import 'package:quiz_app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:quiz_app/features/quiz/presentation/provider/status.dart';
 import 'package:quiz_app/features/quiz/presentation/widgets/difficulty_button.dart';
@@ -28,7 +29,8 @@ class HomePage extends StatelessWidget {
             ),
           ),
         )
-        .then((value) => context.read<Status>().isPlaying = true);
+        .onError((error, stackTrace) => showSnackBar(context, error.toString()))
+        .then((value) => context.read<Status>().changeIsLoading());
   }
 
   @override

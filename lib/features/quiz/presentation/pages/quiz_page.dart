@@ -35,9 +35,10 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   void init(BuildContext context) {
-    title = findCategoryById(Provider.of<Status>(context).category);
-    question = Provider.of<Status>(context)
-        .questions[Provider.of<Status>(context).currentQ];
+    var obj = Provider.of<Status>(context);
+
+    title = findCategoryById(obj.category);
+    question = obj.questions[obj.currentQ];
     choiceList = question.incorrectAnswers
       ..add(question.correctAnswer)
       ..shuffle();
