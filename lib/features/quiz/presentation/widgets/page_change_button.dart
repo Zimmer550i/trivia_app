@@ -17,10 +17,12 @@ class Button extends StatelessWidget {
       padding: EdgeInsets.only(bottom: DEFAULT_PADDING),
       child: GestureDetector(
         onTap: () {
-          if (callBack != null) {
+          if (callBack != null &&
+              !Provider.of<Status>(context, listen: false).isLoading) {
             callBack!(context);
-          } else {
-          }
+          } else if (Provider.of<Status>(context, listen: false).isLoading) {
+            Provider.of<Status>(context, listen: false).changeIsLoading(false);
+          } else {}
         },
         child: Container(
           height: BASE_WIDGET_HEIGHT,

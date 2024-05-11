@@ -30,8 +30,11 @@ class Result extends StatelessWidget {
               padding: EdgeInsets.all(DEFAULT_PADDING * 2),
               child: Column(
                 children: [
-                  Lottie.asset("assets/congrats.json",
-                      width: MediaQuery.of(context).size.width / 2),
+                  Lottie.asset(
+                    "assets/congrats.json",
+                    width: MediaQuery.of(context).size.width / 2,
+                    repeat: false,
+                  ),
                   Text(
                     "Congrats!",
                     style: AppTheme.largeText.copyWith(
@@ -105,6 +108,7 @@ class Result extends StatelessWidget {
               text: "Home",
               isColored: true,
               callBack: (p0) {
+                context.read<Status>().reset();
                 Navigator.of(context).pop();
               },
             ),

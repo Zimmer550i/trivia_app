@@ -70,19 +70,19 @@ class Status extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeIsLoading() {
-    isLoading = !isLoading;
+  void changeIsLoading(bool s) {
+    isLoading = s;
     notifyListeners();
   }
 
   Future<bool> getQuestions(String? category, String? difficulty) async {
     if (await hasInternetConnection()) {
-      changeIsLoading();
+      changeIsLoading(true);
 
       questions =
           await GetQuestions().call(category: category, difficulty: difficulty);
 
-      changeIsLoading();
+      changeIsLoading(false);
       return true;
     } else {
       notifyListeners();

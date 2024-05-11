@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz_app/config/theme/app_theme.dart';
 import 'package:quiz_app/core/constants/constants.dart';
@@ -23,14 +23,14 @@ class HomePage extends StatelessWidget {
     status
         .getQuestions(category, difficulty)
         .then(
-          (value) => Navigator.of(context).push(
+          (value) => !status.isLoading ? Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => const QuizPage(),
             ),
-          ),
+          ): Future.delayed(Duration.zero),
         )
         .onError((error, stackTrace) => showSnackBar(context, error.toString()))
-        .then((value) => context.read<Status>().changeIsLoading());
+        .then((value) => context.read<Status>().changeIsLoading(false));
   }
 
   @override
@@ -38,54 +38,54 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Quiz App",
-          style: AppTheme.appName,
+          "Trivia App",
+          style: GoogleFonts.juliusSansOne(
+              shadows: [AppTheme.boxShadow],
+              color: WHITE_COLOR,
+              fontSize: DEFAULT_PADDING * 3),
         ),
         centerTitle: true,
-        leading: Hero(
-          tag: "logo",
-          child: Lottie.asset("assets/splash.json"),
-        ),
+        automaticallyImplyLeading: false,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-          bottomLeft: Radius.elliptical(3 * DEFAULT_PADDING, DEFAULT_PADDING),
-          bottomRight: Radius.elliptical(3 * DEFAULT_PADDING, DEFAULT_PADDING),
-        )),
-        toolbarHeight: 120,
+          borderRadius: BorderRadius.only(
+            bottomLeft:
+                Radius.elliptical(5 * DEFAULT_PADDING, DEFAULT_PADDING * 1.3),
+            bottomRight:
+                Radius.elliptical(5 * DEFAULT_PADDING, DEFAULT_PADDING * 1.3),
+          ),
+        ),
+        toolbarHeight: DEFAULT_PADDING * 7,
         elevation: 5,
-        actions: [
-          Center(
-            child: Icon(
-              Icons.account_circle_rounded,
-              size: DEFAULT_PADDING * 2,
-            ),
-          ),
-          SizedBox(
-            width: DEFAULT_PADDING,
-          ),
-        ],
       ),
       body: Padding(
         padding: EdgeInsets.only(
-          right: DEFAULT_PADDING,
-          left: DEFAULT_PADDING,
           top: DEFAULT_PADDING * 2,
         ),
         child: Column(
           children: [
-            const DifficultyButton(),
-            SizedBox(
-              height: DEFAULT_PADDING,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: DEFAULT_PADDING),
+              child: const DifficultyButton(),
             ),
             Expanded(
               child: ListView(
-                children:
-                    CATEGORIES.map((map) => topicNames(context, map)).toList(),
+                clipBehavior: Clip.antiAlias,
+                physics: const BouncingScrollPhysics(
+                    decelerationRate: ScrollDecelerationRate.fast),
+                children: [
+                  SizedBox(
+                    height: DEFAULT_PADDING,
+                  ),
+                  ...CATEGORIES.map((map) => topicNames(context, map)),
+                ],
               ),
             ),
-            Button(
-              text: "Begin",
-              callBack: (context) => fetchQuiz(context),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: DEFAULT_PADDING),
+              child: Button(
+                text: "Begin",
+                callBack: (context) => fetchQuiz(context),
+              ),
             ),
           ],
         ),
@@ -96,7 +96,8 @@ class HomePage extends StatelessWidget {
   Widget topicNames(BuildContext context, Map<String, String> item) {
     bool isSelected = context.watch<Status>().category == item['id'];
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: DEFAULT_PADDING / 3),
+      padding: EdgeInsets.symmetric(
+          vertical: DEFAULT_PADDING / 3, horizontal: DEFAULT_PADDING),
       child: InkWell(
         onTap: () {
           context.read<Status>().changeCategory(item['id']!);

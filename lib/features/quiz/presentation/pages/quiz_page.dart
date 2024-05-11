@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz_app/config/theme/app_theme.dart';
 import 'package:quiz_app/core/constants/constants.dart';
@@ -112,7 +115,7 @@ class _QuizPageState extends State<QuizPage> {
               htmlEntityTransform(question.question),
               style: AppTheme.largeText,
             ),
-
+        
             Expanded(child: Container()),
             //Options
             for (int i = 0; i < choiceList.length; i++)
@@ -120,7 +123,7 @@ class _QuizPageState extends State<QuizPage> {
                 text: htmlEntityTransform(choiceList[i]),
                 position: i,
               ),
-
+        
             //Button
             Expanded(child: Container()),
             Button(

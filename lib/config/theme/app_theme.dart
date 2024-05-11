@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_app/core/constants/constants.dart';
 
 class AppTheme{
@@ -7,10 +8,8 @@ class AppTheme{
     appBarTheme: const AppBarTheme(color: SECONDARY_COLOR),
   );
 
-  static TextStyle defaultText  = TextStyle(color: Colors.black, fontSize: DEFAULT_PADDING);
-  static TextStyle titleText  = TextStyle(color: WHITE_COLOR, fontSize: DEFAULT_PADDING*1.5);
-  static TextStyle largeText  = TextStyle(color: WHITE_COLOR, fontSize: DEFAULT_PADDING*2);
-  static TextStyle appName  = TextStyle(color: WHITE_COLOR, fontSize: DEFAULT_PADDING*2, shadows: [Shadow(offset: const Offset(0, 4), blurRadius: 5, color: Colors.black87.withAlpha(100))]);
-
-  static BoxShadow boxShadow = BoxShadow(offset: const Offset(0, 2), spreadRadius: 1, blurRadius: 5, color: Colors.black87.withAlpha(100));
+  static TextStyle defaultText  = GoogleFonts.encodeSansCondensed(color: Colors.black, fontSize: DEFAULT_PADDING);
+  static TextStyle titleText  = GoogleFonts.juliusSansOne(color: WHITE_COLOR, fontSize: DEFAULT_PADDING*1.5);
+  static TextStyle largeText  = GoogleFonts.encodeSansCondensed(color: WHITE_COLOR, fontSize: DEFAULT_PADDING*2);
+  static BoxShadow boxShadow = BoxShadow(offset: const Offset(0, 2), spreadRadius: 2, blurRadius: 5, color: Colors.black87.withAlpha(100));
 }
